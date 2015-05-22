@@ -3,13 +3,13 @@ package com.thoughtworks.yottabyte.repaircurrencyconversion.datamodels;
 import lombok.Getter;
 
 @Getter
-public class Repair {
+public class RepairData {
   private String vehicleType;
   private String code;
   private String description;
   private Double cost;
 
-  public Repair(String row, String parsingRegex){
+  public RepairData(String row, String parsingRegex){
     String[] columns = row.split(parsingRegex);
     assignColumns(columns);
   }
