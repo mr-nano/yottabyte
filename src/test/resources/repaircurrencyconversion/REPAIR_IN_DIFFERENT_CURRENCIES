@@ -1,0 +1,114 @@
+bus,g101,paint , dollars,500.0
+bus,g102,check for faults , pounds,100.0
+bus,g103,clean, rupees,200.0
+bus,g104,add company logo, rupees,300.0
+bus,m201,add a speaker , euros,200
+bus,m204,add surround sound, rupees,10000
+bus,m103,upgrade , pounds,100
+bus,b201,remove and clean all seats ,  pounds,800
+bus,b13,frame straightening , dollars,450
+bus,b1080,custom fabrication , pounds,1000
+bus,b1380,replace battery set ,  dollars,700
+bus,a922,drain and refill radiator ,  dollars,900
+bus,a9104,check water pump ,  dollars,900
+bus,a910,perform first year maintainence,  rupees,12000
+bus,a201,clean inplace,  rupees,12000
+bus,a204,replace a tire ,  dollars,225
+bus,a890,repair broken window, rupees,4500
+bus,a193,engine oiling, rupees,9600
+bus,a42,add tire pressue sensors , dollars,1500
+bus,a103,add parking sensors , pounds,75
+bus,a10393,upgrade dashboard , dollars,15
+bus,a11803,repair break disks, rupees,19500
+bus,a11803,wash hard, rupees,12000
+bus,a11803,adjust inlet/exhaust valve , dollars,375
+bus,ma103,check air compressor, rupees,5000
+bus,ma103,add gps, rupees,3450
+bus,ma103,add seat belt sensor , pounds,16
+bus,ma123,renewing headlight , euros,15
+bus,ma543,airbags , pounds,750
+bus,maKK1,add mobile lock, rupees,1200
+bus,ma8112,renew license plate, rupees,3150
+bus,t234,sandblasting , rupees,34500
+bus,t2314,drain/refill radiator , rupees,30500
+bus,t12,replace v belts if any , rupees,29000
+bus,ta1,annual pollution check ,  dollars,300
+bus,ta100,replace thermostat and water temperature regulartor ,  pounds,290
+bus,ta1010,service raw water pump,  rupees,1900
+bus,ta0x,check at 5000 hours of usage,  rupees,1900
+truck,g101,paint , dollars,375.0
+truck,g102,check for faults , pounds,75.0
+truck,g103,clean, rupees,150.0
+truck,g104,add company logo, rupees,225.0
+truck,m201,add a speaker , euros,200
+truck,m204,add surround sound, rupees,10000
+truck,m103,upgrade , pounds,100
+truck,a922,drain and refill radiator ,  dollars,780
+truck,a9104,check water pump ,  dollars,780
+truck,a910,perform first year maintainence,  rupees,10400
+truck,a201,clean inplace,  rupees,10400
+truck,a204,replace a tire ,  dollars,195
+truck,a890,repair broken window, rupees,3900
+truck,a193,engine oiling, rupees,8320
+truck,a42,add tire pressue sensors , dollars,1300
+truck,a103,add parking sensors , pounds,65
+truck,a10393,upgrade dashboard , dollars,13
+truck,a11803,repair break disks, rupees,16900
+truck,a11803,wash hard, rupees,10400
+truck,a11803,adjust inlet/exhaust valve , dollars,325
+truck,ma103,check air compressor, rupees,5000
+truck,ma103,add gps, rupees,3450
+truck,ma103,add seat belt sensor , pounds,16
+truck,ma123,renewing headlight , euros,15
+truck,ma543,airbags , pounds,750
+truck,maKK1,add mobile lock, rupees,1200
+truck,ma8112,renew license plate, rupees,3150
+truck,t234,sandblasting , rupees,34500
+truck,t2314,drain/refill radiator , rupees,30500
+truck,t12,replace v belts if any , rupees,29000
+truck,ta1,annual pollution check ,  dollars,300
+truck,ta100,replace thermostat and water temperature regulartor ,  pounds,290
+truck,ta1010,service raw water pump,  rupees,1900
+truck,ta0x,check at 5000 hours of usage,  rupees,1900
+car,g101,paint , dollars,150.0
+car,g102,check for faults , pounds,30.0
+car,g103,clean, rupees,60.0
+car,g104,add company logo, rupees,90.0
+car,m201,add a speaker , euros,300
+car,m204,add surround sound, rupees,15000
+car,m103,upgrade , pounds,150
+car,a922,drain and refill radiator ,  dollars,180
+car,a9104,check water pump ,  dollars,180
+car,a910,perform first year maintainence,  rupees,2400
+car,a201,clean inplace,  rupees,2400
+car,a204,replace a tire ,  dollars,45
+car,a890,repair broken window, rupees,900
+car,a193,engine oiling, rupees,1920
+car,a42,add tire pressue sensors , dollars,300
+car,a103,add parking sensors , pounds,15
+car,a10393,upgrade dashboard , dollars,3
+car,a11803,repair break disks, rupees,3900
+car,a11803,wash hard, rupees,2400
+car,a11803,adjust inlet/exhaust valve , dollars,75
+car,ma103,check air compressor, rupees,5000
+car,ma103,add gps, rupees,3450
+car,ma103,add seat belt sensor , pounds,16
+car,ma123,renewing headlight , euros,15
+car,ma543,airbags , pounds,750
+car,maKK1,add mobile lock, rupees,1200
+car,ma8112,renew license plate, rupees,3150
+car,c2103,add cab service module, rupees,3450
+car,c01103,Clean exhaust , euros,50
+car,c9991,change seats , dollars,650
+car,c723,oiling wipers , euros,10
+car,c000,Wheel painting, rupees,12000
+rikshaw,g101,paint , dollars,37.5
+rikshaw,g102,check for faults , pounds,7.5
+rikshaw,g103,clean, rupees,15.0
+rikshaw,g104,add company logo, rupees,22.5
+rikshaw,r201,clean inplace,  rupees,150
+rikshaw,r204,replace a tire ,  dollars,3
+rikshaw,r113,covering from top , pounds,10
+rikshaw,r133,repair broken frame , dollars,100
+rikshaw,r7103,repair horn, rupees,250
+rikshaw,r91103,recover seats, rupees,900
