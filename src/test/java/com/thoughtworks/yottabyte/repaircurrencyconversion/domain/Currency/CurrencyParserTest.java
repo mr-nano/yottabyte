@@ -1,4 +1,4 @@
-package com.thoughtworks.yottabyte.repaircurrencyconversion.domainmodels.Currency;
+package com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency;
 
 import com.googlecode.zohhak.api.TestWith;
 import com.googlecode.zohhak.api.runners.ZohhakRunner;

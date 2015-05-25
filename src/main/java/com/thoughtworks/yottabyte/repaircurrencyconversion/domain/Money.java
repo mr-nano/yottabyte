@@ -1,6 +1,6 @@
-package com.thoughtworks.yottabyte.repaircurrencyconversion.domainmodels;
+package com.thoughtworks.yottabyte.repaircurrencyconversion.domain;
 
-import com.thoughtworks.yottabyte.repaircurrencyconversion.domainmodels.Currency.Currency;
+import com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency.Currency;
 import lombok.Getter;
 
 @Getter

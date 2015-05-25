@@ -1,10 +1,10 @@
-package com.thoughtworks.yottabyte.repaircurrencyconversion.domainmodels.Currency;
+package com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency;
 
 import com.googlecode.zohhak.api.TestWith;
 import com.googlecode.zohhak.api.runners.ZohhakRunner;
 import org.junit.runner.RunWith;
 
-import static com.thoughtworks.yottabyte.repaircurrencyconversion.domainmodels.Currency.Currency.DOLLARS;
+import static com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency.Currency.DOLLARS;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
