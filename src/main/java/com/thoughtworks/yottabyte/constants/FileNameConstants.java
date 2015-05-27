@@ -18,4 +18,12 @@ public enum FileNameConstants {
   public String distributedCacheLocation(){
     return "./" + this.toString();
   }
+
+  public String refrenceDate() {
+    return this.toString() + "." + MetaConstants.REFERENCE_DATE;
+  }
+
+  public String refrenceDateFormat() {
+    return this.toString() + "." + MetaConstants.REFERENCE_DATE_FORMAT;
+  }
 }

@@ -18,7 +18,7 @@ public class RepairDataTest {
     assertThat(repairData.getVehicleType(),is("car"));
     assertThat(repairData.getCode(),is("c102"));
     assertThat(repairData.getDescription(),is("repair broken windows"));
-    assertThat(repairData.getCurrency(),is("rupees"));
+    assertThat(repairData.getCurrency(),is("RUPEES"));
     assertThat(repairData.getAmount(),is(10000.0));
   }
 

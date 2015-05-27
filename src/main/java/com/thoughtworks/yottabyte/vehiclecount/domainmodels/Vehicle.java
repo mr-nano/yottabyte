@@ -12,7 +12,7 @@ public class Vehicle {
   }
 
   public boolean isOlderThanYears(DateTime referenceDate, Years years) {
-    return Years.yearsBetween(referenceDate,vehicleData.getDate())
+    return Years.yearsBetween(vehicleData.getDate(),referenceDate)
       .isGreaterThan(years);
   }
 

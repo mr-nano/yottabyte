@@ -21,6 +21,8 @@ public class OldVehicleCountDriver extends ConfiguredDriver implements Tool {
     loadPropertiesFile(args[0]);
     Configuration configuration = getConf();
     configuration.set(COLUMN_SEPARATOR, get(VEHICLES.columnSeparator()));
+    configuration.set(COLUMN_SEPARATOR, get(VEHICLES.refrenceDate()));
+    configuration.set(COLUMN_SEPARATOR, get(VEHICLES.refrenceDateFormat()));
 
     Job job = Job.getInstance(configuration,this.getClass().getSimpleName());
     job.setJarByClass(this.getClass());

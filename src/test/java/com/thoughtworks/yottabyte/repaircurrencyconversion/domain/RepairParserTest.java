@@ -60,6 +60,7 @@ public class RepairParserTest {
     List<Repair> expectedRepairs = Arrays.asList(new Repair(dollarRepairData),
       new Repair(rupeeRepairData));
     File repairFile = RepairDataMaker.toFile(repairDataList, columnSeparator);
+//    File repairFile = new File(getClass().getResource("/repaircurrencyconversion/REPAIR_IN_DIFFERENT_CURRENCIES").getPath());
     List<Repair> parsedRepairs = repairParser.parse(repairFile);
 
     assertThat(parsedRepairs, hasSize(2));

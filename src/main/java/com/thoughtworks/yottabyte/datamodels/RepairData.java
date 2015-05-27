@@ -1,7 +1,10 @@
 package com.thoughtworks.yottabyte.datamodels;
 
 import com.google.common.base.Joiner;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -23,7 +26,7 @@ public class RepairData {
     vehicleType = columns[0];
     code = columns[1];
     description = columns[2];
-    currency = columns[3];
+    currency = columns[3].trim().toUpperCase();
     amount = Double.valueOf(columns[4]);
   }
 
