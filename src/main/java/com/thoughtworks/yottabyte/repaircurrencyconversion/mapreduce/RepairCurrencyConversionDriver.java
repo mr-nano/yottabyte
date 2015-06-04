@@ -9,6 +9,12 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.*;
 
 import static com.thoughtworks.yottabyte.constants.FileNameConstants.REPAIR_IN_DIFFERENT_CURRENCIES;
 import static com.thoughtworks.yottabyte.constants.FileNameConstants.REPAIR_IN_DOLLARS;
@@ -42,7 +48,9 @@ public class RepairCurrencyConversionDriver extends ConfiguredDriver implements 
   public static void main(String[] args) throws Exception {
     loader = RepairCurrencyConversionDriver.class.getClassLoader();
     if(args.length < 1){
-      args = new String[]{loader.getResource("properties.config").getPath()};
+      File tempFile = File.createTempFile("config", "properties");
+      Files.copy(loader.getResourceAsStream("config.properties"), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+      args = new String[]{tempFile.getPath()};
     }
     int exitCode = ToolRunner.run(new Configuration(), new RepairCurrencyConversionDriver(), args);
     System.exit(exitCode);
