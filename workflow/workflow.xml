@@ -12,6 +12,22 @@
         <java>
             <main-class>com.thoughtworks.yottabyte.repaircurrencyconversion.mapreduce.RepairCurrencyConversionDriver</main-class>
         </java>
+        <ok to="get-each-category-max"/>
+        <error to="error"/>
+    </action>
+
+    <action name="get-each-category-max">
+        <hive xmlns="uri:oozie:hive-action:0.4">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>hive.metastore.uris</name>
+                    <value>thrift://yottabyte01.thoughtworks.com:9083</value>
+                </property>
+            </configuration>
+            <script>hql/calculate_max_repair_value_per_type.hql</script>
+        </hive>
         <ok to="end"/>
         <error to="error"/>
     </action>
