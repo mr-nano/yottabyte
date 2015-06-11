@@ -10,6 +10,9 @@
 
     <action name="currency-convert">
         <java>
+            <prepare>
+                <delete path="${repairInDollarsPath}"/>
+            </prepare>
             <main-class>com.thoughtworks.yottabyte.repaircurrencyconversion.mapreduce.RepairCurrencyConversionDriver</main-class>
         </java>
         <ok to="get-each-category-max"/>
@@ -27,6 +30,7 @@
                 </property>
             </configuration>
             <script>hql/calculate_max_repair_value_per_type.hql</script>
+            <param>username=${user.name}</param>
         </hive>
         <ok to="end"/>
         <error to="error"/>
