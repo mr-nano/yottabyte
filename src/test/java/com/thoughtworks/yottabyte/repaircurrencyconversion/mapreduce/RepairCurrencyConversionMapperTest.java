@@ -10,8 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.natpryce.makeiteasy.MakeItEasy.*;
-import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataMaker.*;
+import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataBuilders.*;
 
 public class RepairCurrencyConversionMapperTest {
   MapDriver<Object,Text,NullWritable,Text> mapDriver;
@@ -31,7 +30,7 @@ public class RepairCurrencyConversionMapperTest {
   @Test
   public void shouldNotChangeTheCostOfARepairAlreadyInDollars() throws IOException {
 
-    Text repairInDollars = toText(make(a(dummyDollarRepair, with(cost,1.0))),",");
+    Text repairInDollars = toText(dummyDollarRepair().amount(1.0).build(),",");
     Text expectedRepairInDollars = repairInDollars;
 
     mapDriver
@@ -42,8 +41,8 @@ public class RepairCurrencyConversionMapperTest {
 
   @Test
   public void shouldChangeTheCostOfARepairToDollarWhenInDifferentCurrency() throws IOException {
-    Text repairInRupees = toText(make(a(dummyRupeeRepair, with(cost,120.0))),",");
-    Text repairInDollars = toText(make(a(dummyDollarRepair, with(cost,1.92))),",");
+    Text repairInRupees = toText(dummyRupeeRepair().amount(120.0).build(),",");
+    Text repairInDollars = toText(dummyDollarRepair().amount(1.92).build(),",");
 
     mapDriver
       .withInput(NullWritable.get(), repairInRupees)

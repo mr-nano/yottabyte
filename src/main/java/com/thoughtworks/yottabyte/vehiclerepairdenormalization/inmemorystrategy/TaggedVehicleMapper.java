@@ -1,10 +1,9 @@
-package com.thoughtworks.yottabyte.vehiclecount;
+package com.thoughtworks.yottabyte.vehiclerepairdenormalization.inmemorystrategy;
 
 import com.google.common.base.Preconditions;
+import com.thoughtworks.yottabyte.datamodels.VehicleData;
 import com.thoughtworks.yottabyte.vehiclecount.domainmodels.Vehicle;
-import com.thoughtworks.yottabyte.vehiclecount.domainmodels.VehicleParser;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.joda.time.DateTime;
@@ -12,27 +11,22 @@ import org.joda.time.format.DateTimeFormat;
 
 import java.io.IOException;
 
-import static org.joda.time.Years.years;
+import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag.KEY_SEPARATOR;
+import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag.VEHICLE;
 
-public class OlderVehicleMapper extends Mapper<Object, Text, Text, IntWritable> {
+public class TaggedVehicleMapper extends Mapper<Object,Text,Text,Text> {
 
-  public static final String COLUMN_SEPARATOR = "COLUMN_SEPARATOR";
-  public static final String REFERENCE_DATE = "REFERENCE_DATE";
-  public static final String VEHICLE_DATE_FORMAT = "VEHICLE_DATE_FORMAT";
-  public static final String REFERENCE_DATE_FORMAT = "REFERENCE_DATE_FORMAT";
+  public static final String VEHICLE_COLUMN_SEPARATOR = "VEHICLE_COLUMN_SEPARATOR";
+
   private Configuration configuration;
-  private static final IntWritable one = new IntWritable(1);
 
   @Override
-  public void map(Object key, Text row, Context context) throws IOException, InterruptedException {
-    String columnSeparator = get(COLUMN_SEPARATOR);
-    DateTime referenceDate = getDate(REFERENCE_DATE);
-    String vehicleDateFormat = get(VEHICLE_DATE_FORMAT);
+  protected void map(Object key, Text row, Context context) throws IOException, InterruptedException {
+    String columnSeparator = get(VEHICLE_COLUMN_SEPARATOR);
+    Vehicle vehicle = new Vehicle(new VehicleData(row.toString(),columnSeparator, ""));
 
-    Vehicle vehicle = new VehicleParser(columnSeparator,vehicleDateFormat).parse(row);
-    if(vehicle.isOlderThanYears(referenceDate, years(15))){
-      context.write(new Text(vehicle.getType()), one);
-    }
+    context.write(new Text(vehicle.getType()),
+      new Text(row + KEY_SEPARATOR + VEHICLE));
   }
 
   @Override
@@ -55,9 +49,3 @@ public class OlderVehicleMapper extends Mapper<Object, Text, Text, IntWritable> 
   }
 
 }
-
-
-
-
-
-

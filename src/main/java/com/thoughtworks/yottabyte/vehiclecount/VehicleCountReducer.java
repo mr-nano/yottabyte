@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class VehicleCountReducer extends Reducer<Text,IntWritable,NullWritable,Text> {
   @Override
-  protected void reduce(Text vehicleType, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+  protected void reduce(Text vehicleType, Iterable<IntWritable> values, Context context)
+    throws IOException, InterruptedException {
     int numberOfVehicles = 0;
     for (IntWritable value : values) {
       numberOfVehicles++;
@@ -18,3 +19,12 @@ public class VehicleCountReducer extends Reducer<Text,IntWritable,NullWritable,T
     context.write(NullWritable.get(), new Text(message));
   }
 }
+
+
+
+
+
+
+
+
+

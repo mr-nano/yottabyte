@@ -1,6 +1,6 @@
 package com.thoughtworks.yottabyte.vehiclerepairdenormalization.secondarysortstrategy;
 
-import com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.RecordType;
+import com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.hadoop.io.WritableComparable;
@@ -15,12 +15,12 @@ import static org.apache.hadoop.io.WritableUtils.*;
 public class TaggedKey implements WritableComparable<TaggedKey> {
 
   @Getter
-  private String identifier;
+  private String vehicleType;
 
-  private RecordType tag;
+  private Tag tag;
 
-  public TaggedKey(String identifier, RecordType tag) {
-    this.identifier = identifier;
+  public TaggedKey(String vehicleType, Tag tag) {
+    this.vehicleType = vehicleType;
     this.tag = tag;
   }
 
@@ -31,13 +31,13 @@ public class TaggedKey implements WritableComparable<TaggedKey> {
 
   @Override
   public void write(DataOutput out) throws IOException {
-    writeString(out,identifier);
+    writeString(out, vehicleType);
     writeEnum(out, tag);
   }
 
   @Override
   public void readFields(DataInput in) throws IOException {
-    identifier = readString(in);
-    tag = readEnum(in,RecordType.class);
+    vehicleType = readString(in);
+    tag = readEnum(in,Tag.class);
   }
 }

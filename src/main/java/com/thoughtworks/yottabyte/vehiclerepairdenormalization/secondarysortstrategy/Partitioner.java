@@ -1,10 +1,10 @@
 package com.thoughtworks.yottabyte.vehiclerepairdenormalization.secondarysortstrategy;
 
-import com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.TaggedText;
+import org.apache.hadoop.io.Text;
 
-public class Partitioner extends org.apache.hadoop.mapreduce.Partitioner<TaggedKey,TaggedText> {
+public class Partitioner extends org.apache.hadoop.mapreduce.Partitioner<TaggedKey,Text> {
   @Override
-  public int getPartition(TaggedKey key, TaggedText taggedText, int numberOfReducers) {
-    return key.getIdentifier().hashCode() % numberOfReducers;
+  public int getPartition(TaggedKey key, Text taggedText, int numberOfReducers) {
+    return key.getVehicleType().hashCode() % numberOfReducers;
   }
 }

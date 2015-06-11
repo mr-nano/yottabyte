@@ -1,7 +1,7 @@
 package com.thoughtworks.yottabyte.repaircurrencyconversion.domain;
 
 import com.thoughtworks.yottabyte.datamodels.RepairData;
-import com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataMaker;
+import com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataBuilders;
 import org.apache.hadoop.io.Text;
 import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.Before;
@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.natpryce.makeiteasy.MakeItEasy.a;
-import static com.natpryce.makeiteasy.MakeItEasy.make;
-import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataMaker.*;
+import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataBuilders.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -32,15 +30,15 @@ public class RepairParserTest {
   @Before
   public void setup(){
     repairParser = new RepairParser(columnSeparator);
-    dollarRepairData = make(a(dummyDollarRepair));
-    rupeeRepairData = make(a(dummyRupeeRepair));
+    dollarRepairData = dummyDollarRepair().build();
+    rupeeRepairData = dummyRupeeRepair().build();
   }
 
   @Test
   public void shouldParseFromText() throws Exception {
     Text dollarRepairText = toText(dollarRepairData, columnSeparator);
     Repair parsedRepair = repairParser.parse(dollarRepairText);
-    Repair expectedRepair = new Repair(make(a(dummyDollarRepair)));
+    Repair expectedRepair = new Repair(dummyDollarRepair().build());
 
     assertThat(parsedRepair, new SamePropertyValuesAs(expectedRepair));
   }
@@ -49,7 +47,7 @@ public class RepairParserTest {
   public void shouldParseFromString(){
     String dollarRepairString = toText(dollarRepairData,columnSeparator).toString();
     Repair parsedRepair = repairParser.parse(dollarRepairString);
-    Repair expectedRepair = new Repair(make(a(dummyDollarRepair)));
+    Repair expectedRepair = new Repair(dummyDollarRepair().build());
 
     assertThat(parsedRepair, new SamePropertyValuesAs(expectedRepair));
   }
@@ -59,8 +57,7 @@ public class RepairParserTest {
     List<RepairData> repairDataList = Arrays.asList(dollarRepairData,rupeeRepairData);
     List<Repair> expectedRepairs = Arrays.asList(new Repair(dollarRepairData),
       new Repair(rupeeRepairData));
-    File repairFile = RepairDataMaker.toFile(repairDataList, columnSeparator);
-//    File repairFile = new File(getClass().getResource("/repaircurrencyconversion/REPAIR_IN_DIFFERENT_CURRENCIES").getPath());
+    File repairFile = RepairDataBuilders.toFile(repairDataList, columnSeparator);
     List<Repair> parsedRepairs = repairParser.parse(repairFile);
 
     assertThat(parsedRepairs, hasSize(2));
@@ -70,7 +67,7 @@ public class RepairParserTest {
 
   @Test
   public void shouldReturnEmptyListOfRepairWhenParsingAnEmptyFile() throws IOException {
-    File repairFile = RepairDataMaker.toFile(new ArrayList<RepairData>(),",");
+    File repairFile = RepairDataBuilders.toFile(new ArrayList<RepairData>(), ",");
     assertThat(repairParser.parse(repairFile),hasSize(0));
   }
 

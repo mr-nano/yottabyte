@@ -14,6 +14,6 @@ public class GroupingComparator extends WritableComparator {
     TaggedKey key1 = (TaggedKey) w1;
     TaggedKey key2 = (TaggedKey) w2;
 
-    return key1.getIdentifier().compareTo(key2.getIdentifier());
+    return key1.getVehicleType().compareTo(key2.getVehicleType());
   }
 }

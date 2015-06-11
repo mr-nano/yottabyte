@@ -10,6 +10,7 @@
 
   <properties>
     <cdh.hadoop.version>2.5.0-cdh5.3.2</cdh.hadoop.version>
+    <cdh.hadoop.version.old>2.5.0-cdh5.2.5</cdh.hadoop.version.old>
     <slf4jVersion>1.7.5</slf4jVersion>
   </properties>
 
@@ -73,6 +74,12 @@
       <version>${cdh.hadoop.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-datajoin</artifactId>
+      <version>${cdh.hadoop.version.old}</version>
+      <scope>provided</scope>
+    </dependency>
 
     <dependency>
       <groupId>joda-time</groupId>
@@ -125,12 +132,6 @@
       <artifactId>mrunit</artifactId>
       <version>1.1.0</version>
       <classifier>hadoop2</classifier>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.natpryce</groupId>
-      <artifactId>make-it-easy</artifactId>
-      <version>4.0.0</version>
       <scope>test</scope>
     </dependency>
 

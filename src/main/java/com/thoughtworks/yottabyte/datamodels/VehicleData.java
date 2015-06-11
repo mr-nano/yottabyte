@@ -1,10 +1,7 @@
 package com.thoughtworks.yottabyte.datamodels;
 
 import com.google.common.base.Joiner;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
@@ -12,7 +9,10 @@ import org.joda.time.format.DateTimeFormat;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class VehicleData {
+
+  private String dateTimeFormat;
 
   private String type;
   private String registrationNumber;
@@ -20,6 +20,7 @@ public class VehicleData {
   private DateTime date;
 
   public VehicleData(String row, String parsingRegex, String dateTimeFormat) {
+    this.dateTimeFormat = dateTimeFormat;
     String[] columns = row.split(parsingRegex);
     assignColumns(columns,dateTimeFormat);
   }
@@ -35,7 +36,7 @@ public class VehicleData {
   public String toStringRepresentation(String separator) {
     return Joiner.on(separator)
       .join(new Object[]{
-        type, registrationNumber, owner, date
+        type, registrationNumber, owner, date.toString(dateTimeFormat)
       });
   }
 }
