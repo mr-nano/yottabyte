@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-import static com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency.Currency.DOLLARS;
+import static com.thoughtworks.yottabyte.repaircurrencyconversion.domain.currency.Currency.DOLLARS;
 
 public class RepairCurrencyConversionMapper extends Mapper<Object, Text, NullWritable, Text> {
 

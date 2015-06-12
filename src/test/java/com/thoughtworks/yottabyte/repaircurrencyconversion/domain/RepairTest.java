@@ -2,7 +2,7 @@ package com.thoughtworks.yottabyte.repaircurrencyconversion.domain;
 
 import org.junit.Test;
 
-import static com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency.Currency.RUPEES;
+import static com.thoughtworks.yottabyte.repaircurrencyconversion.domain.currency.Currency.RUPEES;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataBuilders.dummyDollarRepair;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

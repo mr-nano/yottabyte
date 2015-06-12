@@ -1,8 +1,8 @@
 package com.thoughtworks.yottabyte.repaircurrencyconversion.domain;
 
 import com.thoughtworks.yottabyte.datamodels.RepairData;
-import com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency.Currency;
-import com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Currency.CurrencyParser;
+import com.thoughtworks.yottabyte.repaircurrencyconversion.domain.currency.Currency;
+import com.thoughtworks.yottabyte.repaircurrencyconversion.domain.currency.CurrencyParser;
 import lombok.Delegate;
 
 public class Repair {
