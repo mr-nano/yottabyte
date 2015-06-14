@@ -1,6 +1,7 @@
 package com.thoughtworks.yottabyte.vehiclerepairdenormalization.secondarysortstrategy;
 
 import com.google.common.base.Preconditions;
+import com.thoughtworks.yottabyte.vehiclefiltercount.OldVehicleCountDriver;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -10,6 +11,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +23,8 @@ import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.secondarys
 import static org.apache.hadoop.mapreduce.lib.input.MultipleInputs.addInputPath;
 
 public class Driver extends Configured implements Tool {
+
+  private static ClassLoader loader;
   private Properties properties = new Properties();
 
   @Override
@@ -36,7 +40,7 @@ public class Driver extends Configured implements Tool {
     job.setJarByClass(this.getClass());
 
     addInputPath(job, getPath(VEHICLES.path()), TextInputFormat.class, TaggedVehicleMapper.class);
-    addInputPath(job, getPath(REPAIR_IN_DOLLARS.path()), TextInputFormat.class, TaggedRepairMapper.class);
+    addInputPath(job, getPath(REPAIRS.path()), TextInputFormat.class, TaggedRepairMapper.class);
 
     FileOutputFormat.setOutputPath(job, getPath(VEHICLES_REPAIRS.path()));
 
@@ -52,6 +56,15 @@ public class Driver extends Configured implements Tool {
     job.setPartitionerClass(Partitioner.class);
 
     return job.waitForCompletion(true) ? 0 : 1;
+  }
+
+  public static void main(String[] args) throws Exception {
+    loader = Driver.class.getClassLoader();
+    if (args.length < 1) {
+      args = new String[]{loader.getResource("config.properties").getPath()};
+    }
+    int exitCode = ToolRunner.run(new Configuration(), new Driver(), args);
+    System.exit(exitCode);
   }
 
   protected void loadPropertiesFile(String propertyFilePath) throws IOException {
