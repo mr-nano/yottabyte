@@ -11,18 +11,21 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static com.thoughtworks.yottabyte.constants.FileNameConstants.VEHICLES_COUNT;
 import static com.thoughtworks.yottabyte.constants.FileNameConstants.VEHICLES;
-import static com.thoughtworks.yottabyte.vehiclecount.VehicleMapper.*;
+import static com.thoughtworks.yottabyte.constants.FileNameConstants.VEHICLES_COUNT;
+import static com.thoughtworks.yottabyte.vehiclecount.VehicleMapper.COLUMN_SEPARATOR;
+import static com.thoughtworks.yottabyte.vehiclecount.VehicleMapper.VEHICLE_DATE_FORMAT;
 
 public class VehicleCountDriver extends Configured implements Tool {
 
+  private static ClassLoader loader;
   private Properties properties = new Properties();
 
   @Override
@@ -32,7 +35,7 @@ public class VehicleCountDriver extends Configured implements Tool {
     configuration.set(COLUMN_SEPARATOR, get(VEHICLES.columnSeparator()));
     configuration.set(VEHICLE_DATE_FORMAT, get(VEHICLES.dateFormat()));
 
-    Job job = Job.getInstance(configuration,this.getClass().getSimpleName());
+    Job job = Job.getInstance(configuration, this.getClass().getSimpleName());
     job.setJarByClass(this.getClass());
 
     FileInputFormat.setInputPaths(job, getPath(VEHICLES.path()));
@@ -49,21 +52,31 @@ public class VehicleCountDriver extends Configured implements Tool {
     return job.waitForCompletion(true) ? 0 : 1;
   }
 
+  public static void main(String[] args) throws Exception {
+    loader = VehicleCountDriver.class.getClassLoader();
+    if (args.length < 1) {
+      args = new String[]{loader.getResource("config.properties").getPath()};
+    }
+    int exitCode = ToolRunner.run(new Configuration(), new VehicleCountDriver(), args);
+    System.exit(exitCode);
+  }
+
+
   protected void loadPropertiesFile(String propertyFilePath) throws IOException {
-    try(InputStream propertiesInputStream = new FileInputStream(propertyFilePath)){
+    try (InputStream propertiesInputStream = new FileInputStream(propertyFilePath)) {
       properties.load(propertiesInputStream);
-    }catch (NullPointerException npe){
+    } catch (NullPointerException npe) {
       System.out.println("No properties file found");
       System.exit(1);
     }
   }
 
-  protected String get(String propertyName){
+  protected String get(String propertyName) {
     return Preconditions.checkNotNull(properties.getProperty(propertyName),
       "Expected %s to be present, but was not", propertyName);
   }
 
-  protected Path getPath(String propertyName){
+  protected Path getPath(String propertyName) {
     return new Path(get(propertyName));
   }
 

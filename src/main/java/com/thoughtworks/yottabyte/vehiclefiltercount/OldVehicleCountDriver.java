@@ -11,6 +11,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import static com.thoughtworks.yottabyte.vehiclefiltercount.OlderVehicleMapper.*
 
 public class OldVehicleCountDriver extends Configured implements Tool {
 
+  private static ClassLoader loader;
   private Properties properties = new Properties();
 
   @Override
@@ -49,6 +51,15 @@ public class OldVehicleCountDriver extends Configured implements Tool {
     job.setOutputValueClass(Text.class);
 
     return job.waitForCompletion(true) ? 0 : 1;
+  }
+
+  public static void main(String[] args) throws Exception {
+    loader = OldVehicleCountDriver.class.getClassLoader();
+    if (args.length < 1) {
+      args = new String[]{loader.getResource("config.properties").getPath()};
+    }
+    int exitCode = ToolRunner.run(new Configuration(), new OldVehicleCountDriver(), args);
+    System.exit(exitCode);
   }
 
   protected void loadPropertiesFile(String propertyFilePath) throws IOException {
