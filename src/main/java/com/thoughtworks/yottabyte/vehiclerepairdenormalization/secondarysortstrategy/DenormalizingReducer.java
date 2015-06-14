@@ -17,7 +17,7 @@ import java.util.List;
 
 import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag.*;
 
-public class DenormalizingReducer extends Reducer<Text, Text, NullWritable, Text> {
+public class DenormalizingReducer extends Reducer<TaggedKey, Text, NullWritable, Text> {
 
   public static final String REPAIR_COLUMN_SEPARATOR = "REPAIR_COLUMN_SEPARATOR";
   public static final String VEHICLE_COLUMN_SEPARATOR = "VEHICLE_COLUMN_SEPARATOR";
@@ -27,7 +27,7 @@ public class DenormalizingReducer extends Reducer<Text, Text, NullWritable, Text
   private Configuration configuration;
 
   @Override
-  protected void reduce(Text key, Iterable<Text> rows, Context context) throws IOException, InterruptedException {
+  protected void reduce(TaggedKey key, Iterable<Text> rows, Context context) throws IOException, InterruptedException {
 
     repairs = new ArrayList<>();
     Text taggedText;

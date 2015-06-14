@@ -9,6 +9,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
+import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag.KEY_SEPARATOR;
 import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag.REPAIR;
 
 public class TaggedRepairMapper extends Mapper<Object,Text,TaggedKey,Text> {
@@ -33,7 +34,7 @@ public class TaggedRepairMapper extends Mapper<Object,Text,TaggedKey,Text> {
     Repair repair = new Repair(new RepairData(row.toString(),columnSeparator));
 
     context.write(new TaggedKey(repair.getVehicleType(),REPAIR),
-      new Text(row + "::" + REPAIR));
+      new Text(row + KEY_SEPARATOR + REPAIR));
   }
 
 }
