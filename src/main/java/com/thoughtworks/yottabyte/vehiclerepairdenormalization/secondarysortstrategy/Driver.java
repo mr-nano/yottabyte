@@ -1,7 +1,6 @@
 package com.thoughtworks.yottabyte.vehiclerepairdenormalization.secondarysortstrategy;
 
 import com.google.common.base.Preconditions;
-import com.thoughtworks.yottabyte.vehiclefiltercount.OldVehicleCountDriver;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
