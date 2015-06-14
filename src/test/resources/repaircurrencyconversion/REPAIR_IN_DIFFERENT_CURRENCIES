@@ -19,7 +19,7 @@ bus,a193,engine oiling, rupees,9600
 bus,a42,add tire pressue sensors , dollars,1500
 bus,a103,add parking sensors , pounds,75
 bus,a10393,upgrade dashboard , dollars,15
-bus,a11803,repair break disks, rupees,19500
+bus,a11803,repair brake disks, rupees,19500
 bus,a11803,wash hard, rupees,12000
 bus,a11803,adjust inlet/exhaust valve , dollars,375
 bus,ma103,check air compressor, rupees,5000
@@ -53,7 +53,7 @@ truck,a193,engine oiling, rupees,8320
 truck,a42,add tire pressue sensors , dollars,1300
 truck,a103,add parking sensors , pounds,65
 truck,a10393,upgrade dashboard , dollars,13
-truck,a11803,repair break disks, rupees,16900
+truck,a11803,repair brake disks, rupees,16900
 truck,a11803,wash hard, rupees,10400
 truck,a11803,adjust inlet/exhaust valve , dollars,325
 truck,ma103,check air compressor, rupees,5000
@@ -87,7 +87,7 @@ car,a193,engine oiling, rupees,1920
 car,a42,add tire pressue sensors , dollars,300
 car,a103,add parking sensors , pounds,15
 car,a10393,upgrade dashboard , dollars,3
-car,a11803,repair break disks, rupees,3900
+car,a11803,repair brake disks, rupees,3900
 car,a11803,wash hard, rupees,2400
 car,a11803,adjust inlet/exhaust valve , dollars,75
 car,ma103,check air compressor, rupees,5000

@@ -6,8 +6,6 @@ import com.thoughtworks.yottabyte.vehiclecount.domainmodels.Vehicle;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 
 import java.io.IOException;
 
@@ -17,13 +15,14 @@ import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag
 public class TaggedVehicleMapper extends Mapper<Object,Text,Text,Text> {
 
   public static final String VEHICLE_COLUMN_SEPARATOR = "VEHICLE_COLUMN_SEPARATOR";
+  public static final String VEHICLE_DATE_FORMAT = "VEHICLE_DATE_FORMAT";
 
   private Configuration configuration;
 
   @Override
   protected void map(Object key, Text row, Context context) throws IOException, InterruptedException {
     String columnSeparator = get(VEHICLE_COLUMN_SEPARATOR);
-    Vehicle vehicle = new Vehicle(new VehicleData(row.toString(),columnSeparator, ""));
+    Vehicle vehicle = new Vehicle(new VehicleData(row.toString(),columnSeparator, get(VEHICLE_DATE_FORMAT)));
 
     context.write(new Text(vehicle.getType()),
       new Text(row + KEY_SEPARATOR + VEHICLE));
@@ -38,14 +37,6 @@ public class TaggedVehicleMapper extends Mapper<Object,Text,Text,Text> {
   protected String get(String key){
     return Preconditions.checkNotNull(configuration.get(key),
       "Expected %s to be present, but was not", key);
-  }
-
-  protected DateTime getDate(String key){
-    String dateTime =  Preconditions.checkNotNull(configuration.get(key),
-      "Expected %s to be present, but was not", key);
-    String dateTimeFormat = Preconditions.checkNotNull(configuration.get(key + "_FORMAT"),
-      "Expected %s.FORMAT to be present, but was not", key);
-    return DateTimeFormat.forPattern(dateTimeFormat).parseDateTime(dateTime);
   }
 
 }
