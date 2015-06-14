@@ -10,6 +10,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import static org.apache.hadoop.mapreduce.lib.input.MultipleInputs.addInputPath;
 
 public class Driver extends Configured implements Tool {
 
+  private static ClassLoader loader;
   private Properties properties = new Properties();
 
   @Override
@@ -48,6 +50,15 @@ public class Driver extends Configured implements Tool {
     job.setOutputValueClass(Text.class);
 
     return job.waitForCompletion(true) ? 0 : 1;
+  }
+
+  public static void main(String[] args) throws Exception {
+    loader = Driver.class.getClassLoader();
+    if (args.length < 1) {
+      args = new String[]{loader.getResource("config.properties").getPath()};
+    }
+    int exitCode = ToolRunner.run(new Configuration(), new Driver(), args);
+    System.exit(exitCode);
   }
 
   protected void loadPropertiesFile(String propertyFilePath) throws IOException {

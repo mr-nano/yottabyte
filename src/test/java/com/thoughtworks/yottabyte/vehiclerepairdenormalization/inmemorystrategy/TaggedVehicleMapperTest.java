@@ -41,7 +41,7 @@ public class TaggedVehicleMapperTest {
 
     mapDriver
       .withInput(NullWritable.get(), vehicleText)
-      .withOutput(new Text(vehicle.getType()), new Text(vehicleText + KEY_SEPARATOR + VEHICLE));
+      .withOutput(new Text(vehicle.getType().toUpperCase()), new Text(vehicleText + KEY_SEPARATOR + VEHICLE));
 
     mapDriver.runTest();
   }

@@ -22,7 +22,7 @@ public class TaggedRepairMapper extends Mapper<Object,Text,Text,Text> {
     String columnSeparator = get(REPAIR_COLUMN_SEPARATOR);
     Repair repair = new Repair(new RepairData(row.toString(),columnSeparator));
 
-    context.write(new Text(repair.getVehicleType()),
+    context.write(new Text(repair.getVehicleType().trim().toUpperCase()),
       new Text(row + KEY_SEPARATOR + REPAIR));
   }
 

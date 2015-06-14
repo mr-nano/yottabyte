@@ -1,5 +1,6 @@
 package com.thoughtworks.yottabyte.vehiclerepairdenormalization.inmemorystrategy;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.thoughtworks.yottabyte.datamodels.RepairData;
 import com.thoughtworks.yottabyte.datamodels.VehicleData;
@@ -40,7 +41,7 @@ public class DenormalizingReducer extends Reducer<Text, Text, NullWritable, Text
     throws IOException, InterruptedException {
     for (Vehicle vehicle : vehicles) {
       for (Repair repair : repairs) {
-        context.write(NullWritable.get(), new Text(vehicle.getRegistrationNumber() + "," + repair.getCode()));
+        context.write(NullWritable.get(), new Text(Joiner.on(",").join(vehicle.getType(), vehicle.getRegistrationNumber(), repair.getCode(), repair.getDescription())));
       }
     }
   }

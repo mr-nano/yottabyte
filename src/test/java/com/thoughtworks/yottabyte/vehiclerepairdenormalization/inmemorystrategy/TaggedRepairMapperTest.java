@@ -37,7 +37,7 @@ public class TaggedRepairMapperTest {
 
     mapDriver
       .withInput(NullWritable.get(), aRepairText)
-      .withOutput(new Text(aRepair.getVehicleType()),new Text(aRepairText + KEY_SEPARATOR + REPAIR));
+      .withOutput(new Text(aRepair.getVehicleType().toUpperCase()),new Text(aRepairText + KEY_SEPARATOR + REPAIR));
 
     mapDriver.runTest();
   }

@@ -24,7 +24,7 @@ public class TaggedVehicleMapper extends Mapper<Object,Text,Text,Text> {
     String columnSeparator = get(VEHICLE_COLUMN_SEPARATOR);
     Vehicle vehicle = new Vehicle(new VehicleData(row.toString(),columnSeparator, get(VEHICLE_DATE_FORMAT)));
 
-    context.write(new Text(vehicle.getType()),
+    context.write(new Text(vehicle.getType().trim().toUpperCase()),
       new Text(row + KEY_SEPARATOR + VEHICLE));
   }
 
