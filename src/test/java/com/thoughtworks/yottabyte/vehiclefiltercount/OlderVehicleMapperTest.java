@@ -1,6 +1,6 @@
-package com.thoughtworks.yottabyte.vehiclecount;
+package com.thoughtworks.yottabyte.vehiclefiltercount;
 
-import com.thoughtworks.yottabyte.vehiclecount.domainmodels.Vehicle;
+import com.thoughtworks.yottabyte.vehiclefiltercount.domainmodels.Vehicle;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.VehicleDataBuilders.toText;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.VehicleDataBuilders.veryOldVehicleData;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.VehicleDataBuilders.youngVehicleData;
-import static com.thoughtworks.yottabyte.vehiclecount.OlderVehicleMapper.*;
+import static com.thoughtworks.yottabyte.vehiclefiltercount.OlderVehicleMapper.*;
 
 public class OlderVehicleMapperTest {
   MapDriver<Object, Text, Text, IntWritable> mapDriver;

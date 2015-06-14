@@ -1,4 +1,4 @@
-package com.thoughtworks.yottabyte.vehiclecount;
+package com.thoughtworks.yottabyte.vehiclefiltercount;
 
 import com.thoughtworks.yottabyte.vehiclefiltercount.domainmodels.Vehicle;
 import org.apache.hadoop.io.IntWritable;
@@ -24,7 +24,7 @@ public class VehicleCountReducerTest {
 
   @Test
   public void shouldSumUpTotalNumberOfVehiclesForOneType(){
-    Vehicle anOldVehicle = new Vehicle(someVehicleData().build());
+    Vehicle anOldVehicle = new Vehicle(veryOldVehicleData().build());
 
     reduceDriver
       .withInput(new Text(anOldVehicle.getType()), singletonList(new IntWritable(1)))

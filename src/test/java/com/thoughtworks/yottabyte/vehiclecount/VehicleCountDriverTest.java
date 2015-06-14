@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static com.thoughtworks.yottabyte.constants.FileNameConstants.OLD_VEHICLES;
+import static com.thoughtworks.yottabyte.constants.FileNameConstants.VEHICLES_COUNT;
 import static com.thoughtworks.yottabyte.constants.FileNameConstants.VEHICLES;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.VehicleDataBuilders.toFile;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.VehicleDataBuilders.veryOldVehicleData;
@@ -25,14 +25,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 
-public class OldVehicleCountDriverTest extends DriverTestBase {
+public class VehicleCountDriverTest extends DriverTestBase {
 
-  private OldVehicleCountDriver driver;
+  private VehicleCountDriver driver;
 
   private final String TAB_SEPARATOR = "\t";
   private final String OUTPUT_DIR = "output/";
-  private final String REFERENCE_DATE = "2015-01-01";
-  private final String REFERENCE_DATE_FORMAT = "yyyy-MM-dd";
   private final String VEHICLE_DATE_FORMAT = "yyyy-MM-dd";
 
   @Before
@@ -43,14 +41,12 @@ public class OldVehicleCountDriverTest extends DriverTestBase {
 
     properties = new Properties();
     properties.setProperty(VEHICLES.columnSeparator(), TAB_SEPARATOR);
-    properties.setProperty(VEHICLES.referenceDate(), REFERENCE_DATE);
-    properties.setProperty(VEHICLES.referenceDateFormat(), REFERENCE_DATE_FORMAT);
     properties.setProperty(VEHICLES.dateFormat(), VEHICLE_DATE_FORMAT);
-    properties.setProperty(OLD_VEHICLES.path(), OUTPUT_DIR);
+    properties.setProperty(VEHICLES_COUNT.path(), OUTPUT_DIR);
 
     cleanOutputDirectory();
 
-    driver = new OldVehicleCountDriver();
+    driver = new VehicleCountDriver();
   }
 
   @Test
@@ -64,37 +60,7 @@ public class OldVehicleCountDriverTest extends DriverTestBase {
   }
 
   @Test
-  public void shouldExcludeYoungVehiclesFromCounting() throws Exception {
-
-    VehicleData youngVehicleOne = youngVehicleData().build();
-    VehicleData youngVehicleTwo = youngVehicleData().registrationNumber("different").build();
-    File youngVehicleDataFile = toFile(asList(youngVehicleOne,youngVehicleTwo), TAB_SEPARATOR);
-
-    runTestWithInput(youngVehicleDataFile);
-
-    List<String> outputs = readLines(new FileReader("output/part-r-00000"));
-
-    assertThat(outputs, hasSize(0));
-  }
-
-  @Test
-  public void shouldIncludeOldVehiclesInCounting() throws Exception {
-
-    VehicleData oldVehicleData = veryOldVehicleData().type("truck").build();
-    VehicleData youngVehicleTwo = youngVehicleData().registrationNumber("different").build();
-    File vehiclesDataFile = toFile(asList(oldVehicleData,youngVehicleTwo), TAB_SEPARATOR);
-
-    runTestWithInput(vehiclesDataFile);
-
-    List<String> outputs = readLines(new FileReader("output/part-r-00000"));
-
-    assertThat(outputs, hasSize(1));
-    assertThat(outputs.get(0),containsString(" 1 "));
-    assertThat(outputs.get(0),containsString("truck"));
-  }
-
-  @Test
-  public void shouldAddAllOldVehiclesInCounting() throws Exception {
+  public void shouldAddAllVehiclesInCounting() throws Exception {
 
     VehicleData oldTruckOne = veryOldVehicleData().type("truck").build();
     VehicleData oldTruckTwo = veryOldVehicleData().type("truck").registrationNumber("another truck").build();
@@ -104,7 +70,7 @@ public class OldVehicleCountDriverTest extends DriverTestBase {
     VehicleData oldBusThree = veryOldVehicleData().type("bus").registrationNumber("very different bus").build();
 
 
-    VehicleData youngTruckOne = youngVehicleData().type("truck").registrationNumber("young truck").build();
+    VehicleData youngTruckOne = youngVehicleData().type("truck").registrationNumber("yet another truck").build();
     File vehiclesDataFile = toFile(asList(oldTruckOne,oldTruckTwo,oldBusOne,oldBusTwo,youngTruckOne,oldBusThree), TAB_SEPARATOR);
 
     runTestWithInput(vehiclesDataFile);
@@ -115,7 +81,7 @@ public class OldVehicleCountDriverTest extends DriverTestBase {
     assertThat(outputs.get(0),containsString(" 3 "));
     assertThat(outputs.get(0),containsString("bus"));
 
-    assertThat(outputs.get(1),containsString(" 2 "));
+    assertThat(outputs.get(1),containsString(" 3 "));
     assertThat(outputs.get(1),containsString("truck"));
   }
 

@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.thoughtworks.yottabyte.datamodels.RepairData;
 import com.thoughtworks.yottabyte.datamodels.VehicleData;
 import com.thoughtworks.yottabyte.repaircurrencyconversion.domain.Repair;
-import com.thoughtworks.yottabyte.vehiclecount.domainmodels.Vehicle;
+import com.thoughtworks.yottabyte.vehiclefiltercount.domainmodels.Vehicle;
 import com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.NullWritable;

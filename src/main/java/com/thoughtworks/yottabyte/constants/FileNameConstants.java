@@ -7,7 +7,7 @@ public enum FileNameConstants {
   REPAIR_IN_DOLLARS,
   REPAIRS,
   VEHICLES,
-  OLD_VEHICLES,
+  VEHICLES_COUNT,
   VEHICLES_REPAIRS;
 
   public String columnSeparator() {

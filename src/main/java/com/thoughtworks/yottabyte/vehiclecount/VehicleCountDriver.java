@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static com.thoughtworks.yottabyte.constants.FileNameConstants.OLD_VEHICLES;
+import static com.thoughtworks.yottabyte.constants.FileNameConstants.VEHICLES_COUNT;
 import static com.thoughtworks.yottabyte.constants.FileNameConstants.VEHICLES;
-import static com.thoughtworks.yottabyte.vehiclecount.OlderVehicleMapper.*;
+import static com.thoughtworks.yottabyte.vehiclecount.VehicleMapper.*;
 
-public class OldVehicleCountDriver extends Configured implements Tool {
+public class VehicleCountDriver extends Configured implements Tool {
 
   private Properties properties = new Properties();
 
@@ -30,17 +30,15 @@ public class OldVehicleCountDriver extends Configured implements Tool {
     loadPropertiesFile(args[0]);
     Configuration configuration = getConf();
     configuration.set(COLUMN_SEPARATOR, get(VEHICLES.columnSeparator()));
-    configuration.set(REFERENCE_DATE, get(VEHICLES.referenceDate()));
-    configuration.set(REFERENCE_DATE_FORMAT, get(VEHICLES.referenceDateFormat()));
     configuration.set(VEHICLE_DATE_FORMAT, get(VEHICLES.dateFormat()));
 
     Job job = Job.getInstance(configuration,this.getClass().getSimpleName());
     job.setJarByClass(this.getClass());
 
     FileInputFormat.setInputPaths(job, getPath(VEHICLES.path()));
-    FileOutputFormat.setOutputPath(job, getPath(OLD_VEHICLES.path()));
+    FileOutputFormat.setOutputPath(job, getPath(VEHICLES_COUNT.path()));
 
-    job.setMapperClass(OlderVehicleMapper.class);
+    job.setMapperClass(VehicleMapper.class);
     job.setMapOutputKeyClass(Text.class);
     job.setMapOutputValueClass(IntWritable.class);
 

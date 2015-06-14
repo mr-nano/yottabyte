@@ -1,4 +1,4 @@
-package com.thoughtworks.yottabyte.vehiclecount.domainmodels;
+package com.thoughtworks.yottabyte.vehiclefiltercount.domainmodels;
 
 import com.googlecode.zohhak.api.TestWith;
 import com.googlecode.zohhak.api.runners.ZohhakRunner;

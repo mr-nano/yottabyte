@@ -1,4 +1,4 @@
-package com.thoughtworks.yottabyte.vehiclecount.domainmodels;
+package com.thoughtworks.yottabyte.vehiclefiltercount.domainmodels;
 
 import com.thoughtworks.yottabyte.datamodels.VehicleData;
 import org.joda.time.DateTime;
@@ -9,6 +9,11 @@ public class Vehicle {
 
   public Vehicle(VehicleData vehicleData) {
     this.vehicleData = vehicleData;
+  }
+
+  public boolean isOlderThanYears(DateTime referenceDate, Years years) {
+    return Years.yearsBetween(vehicleData.getDate(),referenceDate)
+      .isGreaterThan(years);
   }
 
   public String getType() {

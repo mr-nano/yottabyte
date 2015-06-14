@@ -36,6 +36,10 @@ public class VehicleDataBuilders {
       .date(forPattern(vehicleDateTimePattern).parseDateTime("2015-01-01"));
   }
 
+  public static VehicleData.VehicleDataBuilder someVehicleData(){
+    return veryOldVehicleData();
+  }
+
   public static Text toText(VehicleData vehicleData, String columnSeparator){
     return new Text(vehicleData.toStringRepresentation(columnSeparator));
   }
