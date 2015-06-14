@@ -13,6 +13,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Arrays;
 
+import static com.google.common.base.Joiner.on;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.RepairDataBuilders.dummyRepair;
 import static com.thoughtworks.yottabyte.repaircurrencyconversion.makers.VehicleDataBuilders.someVehicleData;
 import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag.*;
@@ -70,7 +71,8 @@ public class DenormalizingReducerTest {
 
     reduceDriver
       .withInput(new TaggedKey("car", Tag.REPAIR), Arrays.asList(repairText,vehicleText))
-      .withOutput(NullWritable.get(),new Text(vehicle.getRegistrationNumber() + "," + repair.getCode()))
+      .withOutput(NullWritable.get(),new Text(on(",").join(vehicle.getType(), vehicle.getRegistrationNumber(),
+        repair.getCode(), repair.getDescription())))
       .runTest();
   }
 

@@ -33,7 +33,7 @@ public class TaggedRepairMapper extends Mapper<Object,Text,TaggedKey,Text> {
     String columnSeparator = get(REPAIR_COLUMN_SEPARATOR);
     Repair repair = new Repair(new RepairData(row.toString(),columnSeparator));
 
-    context.write(new TaggedKey(repair.getVehicleType(),REPAIR),
+    context.write(new TaggedKey(repair.getVehicleType().trim().toUpperCase(),REPAIR),
       new Text(row + KEY_SEPARATOR + REPAIR));
   }
 

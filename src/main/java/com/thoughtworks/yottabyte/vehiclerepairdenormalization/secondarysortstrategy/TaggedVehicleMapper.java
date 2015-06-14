@@ -37,7 +37,7 @@ public class TaggedVehicleMapper extends Mapper<Object,Text,TaggedKey,Text> {
     Vehicle vehicle = new Vehicle(new VehicleData(row.toString(),columnSeparator,
       get(VEHICLE_DATE_FORMAT)));
 
-    context.write(new TaggedKey(vehicle.getType(),VEHICLE),
+    context.write(new TaggedKey(vehicle.getType().trim().toUpperCase(),VEHICLE),
       new Text(row + KEY_SEPARATOR + VEHICLE));
   }
 

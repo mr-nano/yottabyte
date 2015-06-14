@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Joiner.on;
 import static com.thoughtworks.yottabyte.vehiclerepairdenormalization.domain.Tag.*;
 
 public class DenormalizingReducer extends Reducer<TaggedKey, Text, NullWritable, Text> {
@@ -54,9 +55,10 @@ public class DenormalizingReducer extends Reducer<TaggedKey, Text, NullWritable,
 
     join(vehicle, context);
 
-    for (Text remainingVehicles : rows) {
-      vehicle = new Vehicle(new VehicleData(remainingVehicles.toString(),
-        get(VEHICLE_COLUMN_SEPARATOR), get(VEHICLE_DATE_FORMAT)));
+    for (Text remainingVehicle : rows) {
+      String[] splits = remainingVehicle.toString().split(KEY_SEPARATOR);
+      row = splits[0];
+      vehicle = new Vehicle(new VehicleData(row,get(VEHICLE_COLUMN_SEPARATOR), get(VEHICLE_DATE_FORMAT)));
       join(vehicle, context);
     }
 
@@ -64,7 +66,9 @@ public class DenormalizingReducer extends Reducer<TaggedKey, Text, NullWritable,
 
   private void join(Vehicle vehicle, Context context) throws IOException, InterruptedException {
     for (Repair repair : repairs) {
-      context.write(NullWritable.get(), new Text(vehicle.getRegistrationNumber() + "," + repair.getCode()));
+      context.write(NullWritable.get(),
+        new Text(on(",").join(vehicle.getType(), vehicle.getRegistrationNumber(),
+          repair.getCode(), repair.getDescription())));
     }
   }
 
