@@ -11,7 +11,7 @@
     <action name="currency-convert">
         <java>
             <prepare>
-                <delete path="${repairInDollarsPath}"/>
+                <delete path="${wf:conf('REPAIR_IN_DOLLARS.PATH')}"/>
             </prepare>
             <main-class>com.thoughtworks.yottabyte.repaircurrencyconversion.mapreduce.RepairCurrencyConversionDriver</main-class>
         </java>
