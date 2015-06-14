@@ -30,7 +30,7 @@
                 </property>
             </configuration>
             <script>hql/calculate_max_repair_value_per_type.hql</script>
-            <param>username=${user.name}</param>
+            <param>username=${user}</param>
         </hive>
         <ok to="end"/>
         <error to="error"/>
